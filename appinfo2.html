@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fake News Detection System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e8e8e8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      background-color: #fff;
+      margin: 60px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"], input[type="password"], textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4c63af;
+      color: white;
+      border: none;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Page -->
+  <div class="container" id="loginPage">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Enter Username" required>
+    <input type="password" id="password" placeholder="Enter Password" required>
+    <button onclick="login()">Login</button>
+    <div id="loginError" style="color: red; text-align: center; margin-top: 10px;"></div>
+  </div>
+
+  <!-- Fake News Detection Page -->
+  <div class="container hidden" id="detectionPage">
+    <h2>Fake News Detection</h2>
+    <form id="newsForm">
+      <label for="newsInput">Enter News Text:</label>
+      <textarea id="newsInput" placeholder="Paste news content here..."></textarea>
+      <button type="submit">Check</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const errorDiv = document.getElementById("loginError");
+
+      // Dummy credentials (replace with backend auth in real app)
+      if (username === "admin" && password === "admin123") {
+        document.getElementById("loginPage").classList.add("hidden");
+        document.getElementById("detectionPage").classList.remove("hidden");
+      } else {
+        errorDiv.textContent = "Invalid username or password!";
+      }
+    }
+
+    document.getElementById("newsForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const newsText = document.getElementById("newsInput").value;
+      const resultDiv = document.getElementById("result");
+
+      if (newsText.trim() === "") {
+        resultDiv.textContent = "Please enter some news text.";
+        return;
+      }
+
+      // Simulated prediction
+      const isFake = Math.random() > 0.5;
+      resultDiv.textContent = isFake
+        ? "❌ This news is likely FAKE."
+        : "✅ This news appears to be REAL.";
+    });
+  </script>
+</body>
+</html>

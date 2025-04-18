@@ -1,0 +1,12 @@
+document.getElementById("newsForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const newsText = document.getElementById("newsInput").value;
+      const resultDiv = document.getElementById("result");
+    
+      if (newsText.trim() === "") {
+        resultDiv.textContent = "Please enter some news text.";
+        return;
+      }
+    
+      fetch
+    
